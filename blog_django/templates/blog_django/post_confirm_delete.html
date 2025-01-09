@@ -1,0 +1,22 @@
+{% extends 'blog_django/base.html' %}
+
+
+{% block content %}
+
+<div class="content-section">
+    <form action="{% url 'post-delete' object.id %}" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Delete Post</legend>
+            <h2>"Are You sure you want to delte the Post" {{object.title}}</h2>
+        </fieldset>
+
+        <div class="form-group">
+            <button class="btn btn-outline-danger mt-3" type="submit">Yes,Delete</button>
+            <a class="btn btn-outline-info mt-3" href="{%  url 'detail-post' object.id %}">No Thanks</a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

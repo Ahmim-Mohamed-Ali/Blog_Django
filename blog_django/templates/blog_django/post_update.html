@@ -1,0 +1,28 @@
+{% extends 'blog_django/base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4">Update Post</h2>
+
+    <form method="POST" action="{% url 'post-update' post.id %}">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="id_title" class="form-label">Title</label>
+        {{ form.title}}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_content" class="form-label">Content</label>
+        {{ form.content}}
+      </div>
+
+      <!-- Bouton de soumission -->
+      <button type="submit" class="btn btn-primary">Update Post</button>
+
+    </form>
+
+    <br>
+    <a href="{% url 'detail-post' post.id %}" class="btn btn-secondary">Cancel</a>
+  </div>
+{% endblock %}

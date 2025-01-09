@@ -1,0 +1,53 @@
+{% extends 'blog_django/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center">User Profile</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Profile Information</h5>
+                </div>
+                <div class="card-body text-center">
+                    <!-- Image de profil -->
+                    <img 
+                        src="{{ user.profile.image.url }}" 
+                        alt="Profile Image" 
+                        class="rounded-circle mb-3" 
+                        style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;"
+                    >
+
+                    <h6 class="card-subtitle mb-2 text-muted">Personal Details</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Username:</strong> {{ user.username }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Email:</strong> {{ user.email }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'blog-home' %}" class="btn btn-outline-primary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Change Your Profile</legend>
+            {{u_form|crispy }}
+            {{p_form|crispy }}
+        </fieldset>
+
+        <div class="form-group">
+            <button class="btn btn-outline-info mt-3" type="submit">Update Profile</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
